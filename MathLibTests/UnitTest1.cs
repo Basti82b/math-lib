@@ -8,7 +8,6 @@ namespace MathLibTests
     [TestClass]
     public class UnitTest1
     {
-        private uint[] _expectedResults = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800 };
         private bool _recursive;
 
         [TestMethod]
@@ -34,13 +33,15 @@ namespace MathLibTests
             // Create an instance to test.
             var mathLib = new MathLib.MathLib(_recursive);
 
+            uint[] expectedResults = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800 };
+
             // Try a range of values.
-            for (var i = 0u; i < _expectedResults.Length; i++)
+            for (var i = 0u; i < expectedResults.Length; i++)
             {
                 // Run the method under test:
                 var actualResult = mathLib.Factorial(i);
                 // Verify the result:
-                Assert.AreEqual(_expectedResults[i], actualResult, delta: _expectedResults[i] / 1000);
+                Assert.AreEqual(expectedResults[i], actualResult, delta: expectedResults[i] / 1000);
             }
         }
 
@@ -56,6 +57,47 @@ namespace MathLibTests
         {
             _recursive = false;
             FactorialValueRangeTest();
+        }
+
+        [TestMethod]
+        public void UnevenFactorialTest()
+        {
+            // Create an instance to test:
+            var mathLib = new MathLib.MathLib();
+
+            // Define a test input and output value:
+            var expectedResult = 7 * 5 * 3 * 1;
+            var input = 8u;
+
+            Test(mathLib, expectedResult, input);
+
+            expectedResult = 9 * 7 * 5 * 3 * 1;
+            input = 9u;
+
+            Test(mathLib, expectedResult, input);
+
+            static void Test(MathLib.MathLib mathLib, int expectedResult, uint input)
+            {
+                // Run the method under test:
+                var actualResult = mathLib.UnevenFactorial(input);
+
+                // Verify the result:
+                Assert.AreEqual(expectedResult, actualResult, expectedResult / 1000);
+            }
+        }
+
+        [TestMethod]
+        public void RecursiveUnevenFactorialTest()
+        {
+            _recursive = true;
+            UnevenFactorialTest();
+        }
+
+        [TestMethod]
+        public void LINQUnevenFactorialTest()
+        {
+            _recursive = false;
+            UnevenFactorialTest();
         }
     }
 }
