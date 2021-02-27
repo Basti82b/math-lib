@@ -4,7 +4,7 @@ using System;
 namespace MathLibTests
 {
     /// <summary>
-    /// https://docs.microsoft.com/de-de/visualstudio/test/quick-start-test-driven-development-with-test-explorer?view=vs-2019
+    ///     https://docs.microsoft.com/de-de/visualstudio/test/quick-start-test-driven-development-with-test-explorer?view=vs-2019
     /// </summary>
     [TestClass]
     public class UnitTest1
@@ -41,8 +41,9 @@ namespace MathLibTests
             {
                 // Run the method under test:
                 var actualResult = mathLib.Factorial(i);
+
                 // Verify the result:
-                Assert.AreEqual(expectedResults[i], actualResult, delta: expectedResults[i] / 1000);
+                Assert.AreEqual(expectedResults[i], actualResult, expectedResults[i] / 1000);
             }
         }
 
@@ -54,7 +55,7 @@ namespace MathLibTests
         }
 
         [TestMethod]
-        public void LINQFactorialTest()
+        public void LinqFactorialTest()
         {
             _recursive = false;
             FactorialValueRangeTest();
@@ -108,7 +109,7 @@ namespace MathLibTests
         }
 
         [TestMethod]
-        public void LINQUnevenFactorialTest()
+        public void LinqUnevenFactorialTest()
         {
             _recursive = false;
             UnevenFactorialTest();
@@ -152,7 +153,7 @@ namespace MathLibTests
         }
 
         [TestMethod]
-        public void LINQSquareFactorialTest()
+        public void LinqSquareFactorialTest()
         {
             _recursive = false;
             SquareFactorialTest();

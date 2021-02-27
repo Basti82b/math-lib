@@ -15,7 +15,7 @@ namespace MathLib
 
         public ulong Factorial(uint n)
         {
-            return _recursive ? RecursiveFactorial(n) : LINQFactorial(n);
+            return _recursive ? RecursiveFactorial(n) : LinqFactorial(n);
         }
 
         private ulong RecursiveFactorial(uint n)
@@ -28,14 +28,14 @@ namespace MathLib
             return n * RecursiveFactorial(n - 1);
         }
 
-        private ulong LINQFactorial(uint n)
+        private ulong LinqFactorial(uint n)
         {
             return n == 0 ? 1 : (ulong)Enumerable.Range(1, (int)n).Aggregate((i, j) => i * j);
         }
 
         public ulong UnevenFactorial(uint n)
         {
-            return _recursive ? RecursiveUnevenFactorial(n) : LINQUnevenFactorial(n);
+            return _recursive ? RecursiveUnevenFactorial(n) : LinqUnevenFactorial(n);
         }
 
         private ulong RecursiveUnevenFactorial(uint n)
@@ -49,14 +49,14 @@ namespace MathLib
             return n * RecursiveFactorial(n - 2);
         }
 
-        private static ulong LINQUnevenFactorial(uint n)
+        private static ulong LinqUnevenFactorial(uint n)
         {
             return n == 0 ? 1 : (ulong)Enumerable.Range(1, (int)n).Where(x => x % 2 > 0).Aggregate((i, j) => i * j);
         }
 
         public ulong SquareFactorial(uint n)
         {
-            return _recursive ? RecursiveSquareFactorial(n) : LINQSquareFactorial(n);
+            return _recursive ? RecursiveSquareFactorial(n) : LinqSquareFactorial(n);
         }
 
         private ulong RecursiveSquareFactorial(uint n)
@@ -68,7 +68,7 @@ namespace MathLib
             return (ulong)(Math.Pow(n, 2) * Math.Pow(RecursiveFactorial(n - 1), 2));
         }
 
-        private ulong LINQSquareFactorial(uint n)
+        private ulong LinqSquareFactorial(uint n)
         {
             return n == 0 ? 1 : (ulong)Enumerable.Range(1, (int)n).Aggregate((i, j) => (int)(i * Math.Pow(j, 2)));
         }
