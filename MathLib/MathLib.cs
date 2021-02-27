@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace MathLib
 {
@@ -43,6 +44,21 @@ namespace MathLib
         private static ulong LINQUnevenFactorial(uint n)
         {
             return n == 0 ? 1 : (ulong)Enumerable.Range(1, (int)n).Where(x => x % 2 > 0).Aggregate((i, j) => i * j);
+        }
+
+        public ulong SquareFactorial(uint n)
+        {
+            return _recursive ? RecursiveSquareFactorial(n) : LINQSquareFactorial(n);
+        }
+
+        private ulong RecursiveSquareFactorial(uint n)
+        {
+            return n == 0 ? 1 : (ulong)(Math.Pow(n, 2) * Math.Pow(RecursiveFactorial(n - 1), 2));
+        }
+
+        private ulong LINQSquareFactorial(uint n)
+        {
+            return n == 0 ? 1 : (ulong)Enumerable.Range(1, (int)n).Aggregate((i, j) => (int)(i * Math.Pow(j, 2)));
         }
     }
 }

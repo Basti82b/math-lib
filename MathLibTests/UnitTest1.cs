@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace MathLibTests
 {
@@ -98,6 +99,37 @@ namespace MathLibTests
         {
             _recursive = false;
             UnevenFactorialTest();
+        }
+
+        [TestMethod]
+        public void SquareFactorialTest()
+        {
+            // Create an instance to test:
+            var mathLib = new MathLib.MathLib();
+
+            // Define a test input and output value:
+            var expectedResult = Math.Pow(3, 2) * Math.Pow(2, 2);
+            var input = 3u;
+
+            // Run the method under test:
+            var actualResult = mathLib.SquareFactorial(input);
+
+            // Verify the result:
+            Assert.AreEqual(expectedResult, actualResult, expectedResult / 1000);
+        }
+
+        [TestMethod]
+        public void RecursiveSquareFactorialTest()
+        {
+            _recursive = true;
+            SquareFactorialTest();
+        }
+
+        [TestMethod]
+        public void LINQSquareFactorialTest()
+        {
+            _recursive = false;
+            SquareFactorialTest();
         }
     }
 }
