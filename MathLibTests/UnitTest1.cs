@@ -61,6 +61,19 @@ namespace MathLibTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InsufficientExecutionStackException))]
+        public void RecursiveFactorialStackOverflowTest()
+        {
+            _recursive = true;
+
+            // Create an instance to test:
+            var mathLib = new MathLib.MathLib(_recursive);
+
+            // Run the method under test:
+            mathLib.Factorial(uint.MaxValue);
+        }
+
+        [TestMethod]
         public void UnevenFactorialTest()
         {
             // Create an instance to test:
@@ -102,6 +115,19 @@ namespace MathLibTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InsufficientExecutionStackException))]
+        public void RecursiveUnevenFactorialStackOverflowTest()
+        {
+            _recursive = true;
+
+            // Create an instance to test:
+            var mathLib = new MathLib.MathLib(_recursive);
+
+            // Run the method under test:
+            mathLib.UnevenFactorial(uint.MaxValue);
+        }
+
+        [TestMethod]
         public void SquareFactorialTest()
         {
             // Create an instance to test:
@@ -130,6 +156,19 @@ namespace MathLibTests
         {
             _recursive = false;
             SquareFactorialTest();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InsufficientExecutionStackException))]
+        public void RecursiveSquareFactorialStackOverflowTest()
+        {
+            _recursive = true;
+
+            // Create an instance to test:
+            var mathLib = new MathLib.MathLib(_recursive);
+
+            // Run the method under test:
+            mathLib.SquareFactorial(uint.MaxValue);
         }
     }
 }

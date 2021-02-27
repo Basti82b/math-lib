@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace MathLib
 {
@@ -19,7 +20,12 @@ namespace MathLib
 
         private ulong RecursiveFactorial(uint n)
         {
-            return n == 0 ? 1 : n * RecursiveFactorial(n - 1);
+            if (n == 0)
+                return 1;
+            RuntimeHelpers
+                .EnsureSufficientExecutionStack(); // throws InsufficientExecutionStackException instead of stack overflow
+
+            return n * RecursiveFactorial(n - 1);
         }
 
         private ulong LINQFactorial(uint n)
@@ -38,6 +44,8 @@ namespace MathLib
                 return 1;
             if (n % 2 == 0)
                 n--;
+            RuntimeHelpers.EnsureSufficientExecutionStack();
+
             return n * RecursiveFactorial(n - 2);
         }
 
@@ -53,7 +61,11 @@ namespace MathLib
 
         private ulong RecursiveSquareFactorial(uint n)
         {
-            return n == 0 ? 1 : (ulong)(Math.Pow(n, 2) * Math.Pow(RecursiveFactorial(n - 1), 2));
+            if (n == 0)
+                return 1;
+            RuntimeHelpers.EnsureSufficientExecutionStack();
+
+            return (ulong)(Math.Pow(n, 2) * Math.Pow(RecursiveFactorial(n - 1), 2));
         }
 
         private ulong LINQSquareFactorial(uint n)
